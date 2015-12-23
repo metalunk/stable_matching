@@ -53,4 +53,10 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :matchings do
+    collection do
+      post 'sort'
+    end
+  end
 end
