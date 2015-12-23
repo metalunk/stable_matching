@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   resources :matchings do
     collection do
       post 'sort'
+      post 'calc'
     end
   end
 end
