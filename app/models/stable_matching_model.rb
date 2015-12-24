@@ -17,7 +17,7 @@ class StableMatchingModel
     @women = women
   end
 
-  SAFETY_BREAK = 100
+  SAFETY_BREAK = 1000
 
   def match
     # engage_list : [
