@@ -5,7 +5,7 @@
   This app will show matching which is stable, using Gale-Shapley algorithm<br>
   'There are at least one stable matching' is proofed
 </p>
-<%= form_tag '/calc', class: 'form-horizontal', remote: true do %>
+<%= form_tag '/matchings/calc', :class => 'form-horizontal', :remote => true do %>
     <table class='table table-bordered' style="width: auto; margin: 0 auto 10px;">
       <tr>
         <th>Men</th>
