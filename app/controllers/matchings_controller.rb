@@ -20,11 +20,8 @@ class MatchingsController < ApplicationController
   end
 
   def calc
-    men = params['mans']
-    women = params['womans']
-
-    stable_matching = StableMatchingModel.new(men, women)
-    @engage_list = stable_matching.calc
+    stable_matching = StableMatchingModel.new(params['mans'], params['womans'])
+    @engage_list = stable_matching.match
     render
   end
 end

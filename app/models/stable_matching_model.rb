@@ -1,6 +1,6 @@
 class StableMatchingModel
 
-  # input :men is array of array, that sorted by :man's preference for each :woman
+  # input :men is hash of array, which sorted by :man's preference for each :woman
   #
   # i.e.
   # men : [
@@ -19,7 +19,7 @@ class StableMatchingModel
 
   SAFETY_BREAK = 100
 
-  def calc
+  def match
     # engage_list : [
     #   :man : :woman,
     #   ...
@@ -33,10 +33,7 @@ class StableMatchingModel
         single_mens_preference_list.each do |man, mans_preference_list|
           next if engage_list.has_key? man
           engage_list = propose man, mans_preference_list.first, engage_list
-
-          # man can propose only one time for each woman
-          single_mens_preference_list[man].shift
-          single_mens_preference_list.delete man if single_mens_preference_list[man].blank?
+          single_mens_preference_list = update_preference_list single_mens_preference_list, man
           throw :break if engage_list.size == @men.size
         end
 
@@ -67,5 +64,12 @@ class StableMatchingModel
       end
     end
     engage_list
+  end
+
+  # man can propose only one time for each woman
+  def update_preference_list (preference_list, man)
+    preference_list[man].shift
+    preference_list.delete man if preference_list[man].blank?
+    preference_list
   end
 end
