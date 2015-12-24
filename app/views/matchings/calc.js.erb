@@ -1,0 +1,8 @@
+$.ajax({
+  beforeSend: function () {
+    $('#result').html("<div style='text-align: center; font-size: large;'>loading...</div>");
+  },
+  complete: function () {
+    $('#result').html("<%= j render 'matchings/calc/matching' %>");
+  }
+});

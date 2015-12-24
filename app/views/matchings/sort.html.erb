@@ -1,0 +1,70 @@
+<%= form_tag 'calc', class: 'form-horizontal', remote: true do %>
+    <table class='table table-bordered' style="width: auto; margin: 0 auto 10px;">
+      <tr>
+        <th>Men</th>
+        <th>Women</th>
+      </tr>
+      <% @men.each_with_index do |tmp, i| %>
+          <tr>
+            <td>
+              <%= @men[i] %>
+              <ul id="sortable_<%= i %>_man" class="sortable">
+                <% @women.each do |woman| %>
+                    <li class="ui-state-default">
+                      <span class="glyphicon glyphicon-resize-vertical"></span><%= woman %>
+                      <input type="hidden" name="mans[<%= @men[i] %>][]" value="<%= woman %>">
+                    </li>
+                <% end %>
+              </ul>
+            </td>
+            <td>
+              <%= @women[i] %>
+              <ul id="sortable_<%= i %>_woman" class="sortable">
+                <% @men.each do |man| %>
+                    <li class="ui-state-default">
+                      <span class="glyphicon glyphicon-resize-vertical"></span><%= man %>
+                      <input type="hidden" name="womans[<%= @women[i] %>][]" value="<%= man %>">
+                    </li>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+    <div class="text-center" style="margin: 0 0 20px 0;">
+      <%= submit_tag 'Matching', class: 'btn btn-info btn-lg' %>
+    </div>
+<% end %>
+
+<hr>
+<div id="result"></div>
+
+<style>
+  .sortable {
+    list-style-type: none;
+  }
+
+  .sortable li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+  }
+
+  .ui-state-highlight {
+    height: 1.5em;
+    line-height: 1.2em;
+  }
+</style>
+<script>
+  $(function () {
+    n_men = <%= @men.count %>;
+    for (i = 0; i < n_men; i++) {
+      ['_man', '_woman'].forEach(function (suffix) {
+        id_name = "#sortable_" + i + suffix;
+        $(id_name).sortable({
+          placeholder: "ui-state-highlight"
+        });
+        $(id_name).disableSelection();
+      });
+    }
+  });
+</script>
