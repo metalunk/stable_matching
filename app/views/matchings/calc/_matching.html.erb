@@ -1,0 +1,12 @@
+<table class="table table-bordered" style="width: auto; margin: 0 auto;">
+  <tr>
+    <th>Men</th>
+    <th>Women</th>
+  </tr>
+  <% @engage_list.each do |man, woman| %>
+      <tr>
+        <td><%= man %></td>
+        <td><%= woman %></td>
+      </tr>
+  <% end %>
+</table>
