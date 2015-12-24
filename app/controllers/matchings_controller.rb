@@ -12,8 +12,8 @@ class MatchingsController < ApplicationController
       redirect_to matchings_path
     end
 
-    if @men.count == 0
-      error_msg = 'Please input at least one man and woman.'
+    if @men.count <= 1
+      error_msg = 'Please input at least two pair of man and woman.'
       flash[:notice] = error_msg
       redirect_to matchings_path
     end
